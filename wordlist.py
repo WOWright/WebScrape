@@ -31,14 +31,34 @@ with open("words.csv", 'w') as f:
     for container in containers:
         f.write(container.text + '\n')
 '''
-
+parts = ( 
+ 'Adjective',
+ 'Adverb',
+ 'Conjunction',
+ 'Determiner',
+ 'Interjection',
+ 'Noun',
+ 'Numeral',
+ 'Preposition',
+ 'Pronoun',
+ 'Proper noun',
+ 'Verb')
 
 temp = souped.findAll('td')
 
 with open("words2.txt", 'w') as f:
-    for q in temp:
+    for i,q in enumerate(temp):
+        
         try:
-            f.write(q['data-string'] + '\n')
+            # try to print the word and the part of speech (usually one later)
+            f.write(q['data-string'])
+            w = temp[i+1].text
+            
+            if w in parts:
+                f.write(',' + w + '\n')
+            else:
+                f.write(',\n')
+                
         except:
             pass
 
